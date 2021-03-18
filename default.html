@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TO-DO List</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+
+
+</head>
+<body>
+<div id="main">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1>LKMX - Front-End</h1>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="container">
+                <div class="bg-light p-5 rounded">
+                    <h3>To-Do List</h3>
+                    <form @submit.prevent="addTodo" class="d-flex">
+                        <input v-model="newTodo" class="form-control mr-2" type="text" placeholder="escribe una tarea...">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 v-if="!todos.length">No has agregado tareas</h4>
+                            <ol v-else style="padding-top: 10px;">
+                                <li v-for="todo in todos" v-bind:todo="todo" :key="todo">
+                                    <div class="row" style="padding-top: 5px;">
+                                        <div class="col-9">
+                                            <span>{{todo}}</span>
+                                        <input style="display: none; width: 100%" class="form-control-lg hidden_input" v-bind:todo="todo" v-model="editedText" type="text">
+                                        </div>
+                                        <div class="col-3 ">
+                                            <button style="display: none;" v-bind:todo-save="todo" @click="saveTodo()" class="hidden_disk btn btn-light btn-outline-dark del">
+                                                <img src="assets/img/icon-disk.svg">
+                                            </button>
+                                            <button v-bind:todo-edit="todo" @click="updateTodo(todo)" class="btn btn-light btn-outline-dark upd"><img
+                                                    src="assets/img/icon-pen.svg"></button>
+                                            <button v-bind:todo-del="todo" @click="removeTodo(todo)" class="btn btn-light btn-outline-dark del">
+                                                <img src="assets/img/icon-trash.svg">
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</body>
+
+<script src="js/default.js"></script>
+</html>
